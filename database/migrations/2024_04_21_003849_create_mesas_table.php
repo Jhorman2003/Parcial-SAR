@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('mesas', function (Blueprint $table) {
             $table->id();
-            $table->integer('Numero'. 20)->unique();
+            $table->integer('Numero')->unique();
             $table->integer('Capacidad');
             $table->String('Ubicacion');
             $table->timestamps();
