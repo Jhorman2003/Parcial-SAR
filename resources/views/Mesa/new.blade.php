@@ -16,6 +16,7 @@
         <form method="POST" action="{{ route('mesas.store') }}">
     @csrf
     <div class="mb-3">
+
         <label for="inputNumero" class="form-label">Número de Mesa</label>
         <input type="text" class="form-control" id="inputNumero" name="Numero">
     </div>
@@ -36,7 +37,6 @@
     </div>
 </form>
       </div>
-
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

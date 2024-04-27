@@ -64,7 +64,8 @@ class MesaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mesa = Mesa::findOrFail($id);
+        return view('mesa.edit', compact('mesa'));    
     }
 
     /**
@@ -72,7 +73,20 @@ class MesaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'Numero' => 'required',
+            'Capacidad' => 'required|integer',
+            'Ubicacion' => 'required',
+        ]);
+    
+        $mesa = Mesa::findOrFail($id);
+        $mesa->Numero = $request->Numero;
+        $mesa->Capacidad = $request->Capacidad;
+        $mesa->Ubicacion = $request->Ubicacion;
+        $mesa->save();
+    
+        return redirect()->route('mesas.index')
+                        ->with('success', 'Mesa actualizada correctamente');        
     }
 
     /**
