@@ -13,46 +13,49 @@
 
   <body>
   <body>
-<div class="container">
-    <h1>Lista de Reservas</h1>
+  <div class="container">
+    <h1>Listado de Reservas</h1>
     <a href="{{ route('reservas.create') }}" class="btn btn-success">Agregar Reserva</a>
     <table class="table">
         <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Mesa</th>
-            <th scope="col">Cliente</th>
-            <th scope="col">Fecha Reserva</th>
-            <th scope="col">Hora de la Reserva</th>
-            <th scope="col">Número de Personas</th>
-            <th scope="col">Acciones</th>
-        </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mesa ID</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Fecha de Reserva</th>
+                <th scope="col">Hora de la Reserva</th>
+                <th scope="col">Número de Personas</th>
+                <th scope="col">Acciones</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach($reservas as $reserva)
+            @foreach($reservas as $reserva)
             <tr>
                 <th scope="row">{{ $reserva->id }}</td>
-                <td>{{ $reserva->mesa->Ubicacion }}</td>
+                <td>{{ $reserva->mesa_id }}</td>
                 <td>{{ $reserva->cliente->Nombre }} {{ $reserva->cliente->Apellido }}</td>
                 <td>{{ $reserva->Fecha_Reserva }}</td>
                 <td>{{ $reserva->Hora_de_la_reserva }}</td>
                 <td>{{ $reserva->Numero_de_personas }}</td>
-                <td><span> Acciones </span> </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a href="{{ route('reservas.edit', $reserva->id) }}" class="btn btn-primary">Editar</a>
+                        <form action="{{ route('reservas.destroy', $reserva->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta reserva?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
+    
   </body>
 </html>

@@ -53,7 +53,7 @@
 
     <div>
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a href="{{ route('reservas.index') }}" class="btn btn-primary">Cancel</a>
+        <a href="{{ route('reservas.index') }}" class="btn btn-warning">Cancel</a>
     </div>
 </form>
         

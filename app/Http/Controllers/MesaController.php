@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mesa;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
 class MesaController extends Controller
@@ -63,7 +64,8 @@ class MesaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mesa = Mesa::findOrFail($id);
+        return view('mesa.edit', compact('mesa'));    
     }
 
     /**
@@ -71,7 +73,20 @@ class MesaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'Numero' => 'required',
+            'Capacidad' => 'required|integer',
+            'Ubicacion' => 'required',
+        ]);
+    
+        $mesa = Mesa::findOrFail($id);
+        $mesa->Numero = $request->Numero;
+        $mesa->Capacidad = $request->Capacidad;
+        $mesa->Ubicacion = $request->Ubicacion;
+        $mesa->save();
+    
+        return redirect()->route('mesas.index')
+                        ->with('success', 'Mesa actualizada correctamente');        
     }
 
     /**
@@ -79,6 +94,11 @@ class MesaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            Mesa::findOrFail($id)->delete();
+            return redirect()->route('mesas.index')->with('success', 'Mesa eliminada correctamente');
+        } catch (QueryException $e) {
+            return redirect()->route('mesas.index')->with('error', 'No se puede eliminar la mesa porque está asociada a una o varias reservas');
+        }
     }
 }

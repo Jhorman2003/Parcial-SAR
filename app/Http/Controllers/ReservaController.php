@@ -81,7 +81,11 @@ class ReservaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $reserva = Reserva::findOrFail($id);
+        $mesas = Mesa::all();
+        $clientes = Cliente::all();
+    
+        return view('reserva.edit', compact('reserva', 'mesas', 'clientes'));
     }
 
     /**
@@ -89,14 +93,33 @@ class ReservaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'mesa_id' => 'required',
+            'cliente_id' => 'required',
+            'Fecha_Reserva' => 'required',
+            'Hora_de_la_reserva' => 'required',
+            'Numero_de_personas' => 'required',
+        ]);
+    
+        $reserva = Reserva::findOrFail($id);
+        $reserva->mesa_id = $request->mesa_id;
+        $reserva->cliente_id = $request->cliente_id;
+        $reserva->Fecha_Reserva = $request->Fecha_Reserva;
+        $reserva->Hora_de_la_reserva = $request->Hora_de_la_reserva;
+        $reserva->Numero_de_personas = $request->Numero_de_personas;
+        $reserva->save();
+    
+        return redirect()->route('reservas.index')->with('success', 'Reserva actualizada exitosamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        //
+    {        
+        $reserva = Reserva::findOrFail($id);
+        $reserva->delete();
+
+        return redirect()->route('reservas.index')->with('success', 'Reserva eliminada correctamente');
     }
 }
