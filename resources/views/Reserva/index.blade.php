@@ -37,7 +37,15 @@
                 <td>{{ $reserva->Fecha_Reserva }}</td>
                 <td>{{ $reserva->Hora_de_la_reserva }}</td>
                 <td>{{ $reserva->Numero_de_personas }}</td>
-                <td><span> Acciones </span> </td>
+                <td>
+                <form action="{{ route('reservas.destroy', $reserva->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta reserva?');">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+</form>
+
+                  
+                </td>
                     </tr>
                 @endforeach
             </tbody>

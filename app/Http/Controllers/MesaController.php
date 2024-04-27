@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mesa;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
 class MesaController extends Controller
@@ -79,6 +80,11 @@ class MesaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            Mesa::findOrFail($id)->delete();
+            return redirect()->route('mesas.index')->with('success', 'Mesa eliminada correctamente');
+        } catch (QueryException $e) {
+            return redirect()->route('mesas.index')->with('error', 'No se puede eliminar la mesa porque está asociada a una o varias reservas');
+        }
     }
 }

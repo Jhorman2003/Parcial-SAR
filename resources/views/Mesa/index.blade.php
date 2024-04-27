@@ -13,31 +13,49 @@
   </head>
   <body>
   <div class="container">
-        <h1>Listado de Mesas</h1>
-        <a href="{{ route('mesas.create') }}" class="btn btn-success">Add</a>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Número</th>
-                    <th scope="col">Capacidad</th>
-                    <th scope="col">Ubicación</th>
-                    <th scope="col">Acciones </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($mesas as $mesa)
-                <tr>
-                    <th scope="row">{{ $mesa->mesa_id }}</td>
-                    <td>{{ $mesa->Numero }}</td>
-                    <td>{{ $mesa->Capacidad }}</td>
-                    <td>{{ $mesa->Ubicacion }}</td>
-                    <td><span> Acciones </span> </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <h1>Listado de Mesas</h1>
+    <a href="{{ route('mesas.create') }}" class="btn btn-success">Add</a>
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
     </div>
+    @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Número</th>
+                <th scope="col">Capacidad</th>
+                <th scope="col">Ubicación</th>
+                <th scope="col">Acciones </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($mesas as $mesa)
+            <tr>
+                <th scope="row">{{ $mesa->mesa_id }}</td>
+                <td>{{ $mesa->Numero }}</td>
+                <td>{{ $mesa->Capacidad }}</td>
+                <td>{{ $mesa->Ubicacion }}</td>
+                <td>
+                    <form action="{{ route('mesas.destroy', $mesa->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
 
     <!-- Optional JavaScript; choose one of the two! -->

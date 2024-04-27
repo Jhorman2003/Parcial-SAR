@@ -32,7 +32,7 @@
 
     <div class="mt-3">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a href="{{ route('mesas.index') }}" class="btn btn-primary">Cancel</a>
+        <a href="{{ route('mesas.index') }}" class="btn btn-warning">Cancel</a>
     </div>
 </form>
       </div>
