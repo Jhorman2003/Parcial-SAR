@@ -7,7 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reserva extends Model
 {
-    protected $fillable = ['mesa_id', 'cliente_id', 'Fecha Reserva', 'Hora de la reserva', 'Numero de personas'];
+    use HasFactory;
+    protected $fillable = [
+        
+        'mesa_id', 
+        'cliente_id', 
+        'Fecha_Reserva', 
+        'Hora_de_la_reserva', 
+        'Numero_de_personas'
+    ];
+
 
     public function mesa()
     {

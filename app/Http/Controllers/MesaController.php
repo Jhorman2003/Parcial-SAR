@@ -25,7 +25,7 @@ class MesaController extends Controller
      */
     public function create()
     {
-        //
+        return view('mesa.new');
     }
 
     /**
@@ -33,7 +33,21 @@ class MesaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'Numero' => 'required',
+            'Capacidad' => 'required',
+            'Ubicacion' => 'required'
+        ]);
+    
+        $mesa = new Mesa([
+            'Numero' => $request->get('Numero'),
+            'Capacidad' => $request->get('Capacidad'),
+            'Ubicacion' => $request->get('Ubicacion')
+        ]);
+    
+        $mesa->save();
+    
+        return redirect()->route('mesas.index')->with('success', 'Mesa creada correctamente');
     }
 
     /**

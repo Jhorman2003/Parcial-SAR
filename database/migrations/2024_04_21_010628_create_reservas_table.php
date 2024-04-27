@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('mesa_id');
             $table->unsignedBigInteger('cliente_id');
-            $table->date('Fecha Reserva');
-            $table->time('Hora de la reserva');
-            $table->integer('Numero de personas');
+            $table->date('Fecha_Reserva');
+            $table->time('Hora_de_la_reserva');
+            $table->integer('Numero_de_personas');
             $table->timestamps();
 
             $table->foreign('mesa_id')->references('id')->on('mesas');
