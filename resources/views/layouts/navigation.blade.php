@@ -15,6 +15,15 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('reservas.index')" :active="request()->routeIs('reservas.index')">
+                        {{ __('Reservas') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('mesas.index')" :active="request()->routeIs('mesas.index')">
+                        {{ __('Mesas') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.index')">
+                        {{ __('Clientes') }}
+                    </x-nav-link>
                 </div>            
 
             </div>
@@ -71,7 +80,19 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('reservas.index')" :active="request()->routeIs('reservas.index')">
+                {{ __('Reservas') }}
+            </x-responsive-nav-link>
+
+            <x-nav-link :href="route('mesas.index')" :active="request()->routeIs('mesas.index')">
+                {{ __('Mesas') }}
+            </x-nav-link>
+            <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.index')">
+                {{ __('Clientes') }}
+            </x-nav-link>
         </div>
+        
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
