@@ -12,7 +12,14 @@
       <title>Listado de Clientes</title>
     </head>
     <body>
-    <div class="container">
+      <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Clientes') }}
+            </h2>
+        </x-slot>
+
+        <div class="container">
           <h1>Listado de Clientes</h1>
           <a href="{{ route('clientes.create') }}" class="btn btn-success">Agregar</a>
           <table class="table">
@@ -48,8 +55,8 @@
                   @endforeach
               </tbody>
           </table>
-      </div>
-
+        </div>
+      </x-app-layout>
 
       <!-- Optional JavaScript; choose one of the two! -->
 
